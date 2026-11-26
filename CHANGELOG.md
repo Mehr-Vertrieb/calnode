@@ -32,12 +32,39 @@ exact tag (`ghcr.io/calnode/calnode:0.1.0`) if you need stability between upgrad
 
 ### Added
 
+- **Delete a booking for an erasure request.** Owners and admins can now permanently remove a
+  booking from the Bookings list (trash icon, confirmation dialog; `DELETE /v1/bookings/{id}`).
+  It removes the booking with its attendees, answers, manage links and host assignments, plus the
+  rows that name the person without a cascade: webhook deliveries and their queued jobs, reminder
+  jobs, idempotency records, transcripts and notes. It sends no email and fires no webhook.
+  Offered only where it is safe: an upcoming booking must be cancelled first (so the booker is
+  told and the calendar event goes); paid bookings keep their record; recordings must be deleted
+  first (they are files in object storage); and a cancelled booking whose calendar event removal
+  is still pending is refused until the reconciler has removed it. A past meeting's event stays on
+  the host's calendar, because removing it through the provider would email the guest; the
+  dialog says so. Database backups keep the data until their own retention ends.
+- **German for the admin interface.** The SvelteKit admin now ships `de` alongside `en`
+  and `fr` (`frontend/src/lib/i18n/de.json`, formal *Sie*, terse). Like every non-English
+  catalogue it is a translation without a separate native review. The event-type preview's
+  end time now uses a 24-hour clock for every non-English admin locale, not only French.
+- **Operator- and host-facing emails follow the configured fallback language.** The host
+  notifications (new booking, cancellation, reschedule), the login link, password reset,
+  team invitation and the email-settings test message now read their text from the booker
+  catalogue in the operator's fallback language (`server_settings.fallback_locale`). With no
+  fallback set, or English, the output is byte-identical to before. Attendee emails still
+  follow the attendee's own locale.
 - **German without du or Sie (`de-x-neutral`).** An opt-in wording variant of the German
   booker catalogue that addresses nobody: "Tag auswählen" rather than "Wählen Sie einen
   Tag". It is for operators whose own site is informal, where the formal widget stands out
   and an informal one would be wrong for everyone else. `de` is unchanged and stays formal.
   The variant is never offered in the language switcher or matched from `Accept-Language`;
   select it with `?lang=de-x-neutral` or `<calnode-booking lang="de-x-neutral">`.
+
+### Changed
+
+- **German booker wording.** A booking is now *verschoben* (moved) rather than *umgebucht*,
+  which reads as travel rebooking; a few other strings were made more idiomatic. The same
+  changes are mirrored in `de-x-neutral`.
 
 ### Fixed
 
