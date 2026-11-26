@@ -188,7 +188,8 @@
 			"hideResponses": "Antworten ausblenden",
 			"showResponses": "Antworten anzeigen",
 			"reschedule": "Verschieben",
-			"cancel": "Buchung stornieren"
+			"cancel": "Buchung stornieren",
+			"delete": "Buchung löschen"
 		},
 		"cancelReschedule": "Verschieben abbrechen",
 		"details": {
@@ -221,6 +222,20 @@
 		"status": {
 			"confirmed": "bestätigt",
 			"cancelled": "storniert"
+		},
+		"confirmDelete": {
+			"title": "Buchung endgültig löschen?",
+			"description": "Entfernt die Buchung samt Name, E-Mail und Antworten des Teilnehmers, etwa für einen Löschantrag. Niemand wird benachrichtigt. Der Kalendereintrag eines vergangenen Termins bleibt in Ihrem Kalender; löschen Sie ihn dort, ohne die Gäste zu benachrichtigen. Das lässt sich nicht rückgängig machen.",
+			"confirm": "Endgültig löschen",
+			"cancel": "Buchung behalten"
+		},
+		"delete": {
+			"error": {
+				"cancel_first": "Stornieren Sie die bevorstehende Buchung zuerst und löschen Sie sie dann.",
+				"paid_booking": "Bezahlte Buchungen bleiben als Beleg erhalten und lassen sich hier nicht löschen.",
+				"recordings_first": "Löschen Sie zuerst die Aufzeichnungen dieser Buchung (Aufzeichnungen).",
+				"calendar_pending": "Der Kalendereintrag wird noch entfernt. Versuchen Sie es in einigen Minuten erneut."
+			}
 		}
 	},
 	"availability": {
